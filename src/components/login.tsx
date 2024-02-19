@@ -1,5 +1,6 @@
 "use client";
 
+// Import statements for Firebase functionality, React hooks, and Next.js components.
 import app from "@/firebase/firebaseApp";
 import React, { useEffect } from "react";
 import Link from "next/link";
