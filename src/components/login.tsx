@@ -17,7 +17,7 @@ import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import {auth} from "@/firebase/firebaseApp";
 
-
+  // React state hooks for managing user state, input fields, and error messages.
 export default function Login() {
   app;
   const provider = new GoogleAuthProvider();
@@ -25,6 +25,7 @@ export default function Login() {
   const [user, loading] = useAuthState(auth);
   const router = useRouter();
 
+  // Redirecting authenticated users to a specific page.
   useEffect(() => {
     if (user) {
       router.push("/main");
@@ -49,15 +50,15 @@ export default function Login() {
       );
       const user = userCredential.user;
 
-      // If you need to perform any post-login actions, do them here.
       router.push("/"); // redirecting to home page upon successful login
     } catch (error) {
-      console.error("Error logging in:", error); // or handle the error as you see fit
+      console.error("Error logging in:", error); // error handling
     }
   }
 
-  if (loading) return <h1>Loading...</h1>;
+  if (loading) return <h1>Loading...</h1>; // Loading state UI
 
+    // Login form UI
   return (
     <div className="flex flex-col h-screen bg-gradient-to-r from-blue-400 to-purple-500 items-center justify-center">
       <img src="/loginaktest.png" alt="Logo" className="mb-8" />
