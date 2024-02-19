@@ -82,6 +82,7 @@ export default function RegisterCustomer() {
                 <input className="border rounded-md p-2 mt-2 focus:outline-none focus:ring focus:border-blue-300 w-full" type="text" name="surname" id="surname" value={surname} onChange={(e) => setSurname(e.target.value)}/>
                 <label className="font-semibold mt-4" htmlFor="device">Device Type</label>
                 <select className="border rounded-md p-2 mt-2 focus:outline-none focus:ring focus:border-blue-300 w-full" name="device" id="device" value={deviceType} onChange={(e) => setDevice(e.target.value)}>
+                    <option value="Not Selected">Not Selected</option>
                     <option value="2WD Dynamometer (Model : AK-5600)">2WD Dynamometer (Model : AK-5600)</option>
                     <option value="4WD Dynamometer (Model : AK-5644)">4WD Dynamometer (Model : AK-5644)</option>
                     <option value="4 Gas Exhaust Emission Tester (Model : 5000)">4 Gas Exhaust Emission Tester (Model : 5000)</option>
