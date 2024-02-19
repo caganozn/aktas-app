@@ -7,7 +7,8 @@ import { getFirestore, doc, getDoc, setDoc, Timestamp } from "firebase/firestore
 
 export default function RegisterCustomer() {
     app;
-
+    
+    // State hooks for managing form inputs and feedback message.
     const [feedback, setFeedback] = React.useState("");
     const [name, setName] = React.useState("");
     const [surname, setSurname] = React.useState("");
@@ -15,6 +16,7 @@ export default function RegisterCustomer() {
     const [deviceType, setDevice] = React.useState("");
     const [number, setPhoneNumber] = React.useState("");
     const [date, setDate] = React.useState("");
+    // Converts the state date to a JavaScript Date object and then to a Firebase Timestamp.
     const jsDate = new Date(date);
     const timestamp = Timestamp.fromDate(jsDate);
 
@@ -38,7 +40,8 @@ export default function RegisterCustomer() {
             ) {
                 throw new Error("Please fill in all fields!");
             }
-    
+            
+            // Firestore database instance and document reference.
             const db = getFirestore();
             const userRef = doc(db, "Clients", email); // Using email as the document ID
             await setDoc(userRef, {
@@ -49,6 +52,7 @@ export default function RegisterCustomer() {
                 number: number,
                 date: date,
             });
+            // Updates feedback state and resets form fields upon successful registration.
             setFeedback("Registration successful!");
             setName("");
             setSurname("");
@@ -67,7 +71,7 @@ export default function RegisterCustomer() {
     }
     
   
-
+    // Render method for the form UI.
     return (
         <div className="flex flex-col w-full md:w-1/2 lg:w-1/3 mx-auto mt-10 p-6 shadow-lg rounded-md bg-white">
             <h1 className="text-center text-2xl font-bold mb-6">Register Customer</h1>
