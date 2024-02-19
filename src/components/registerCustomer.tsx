@@ -78,11 +78,11 @@ export default function RegisterCustomer() {
                 <input className="border rounded-md p-2 mt-2 focus:outline-none focus:ring focus:border-blue-300 w-full" type="text" name="surname" id="surname" value={surname} onChange={(e) => setSurname(e.target.value)}/>
                 <label className="font-semibold mt-4" htmlFor="device">Device Type</label>
                 <select className="border rounded-md p-2 mt-2 focus:outline-none focus:ring focus:border-blue-300 w-full" name="device" id="device" value={deviceType} onChange={(e) => setDevice(e.target.value)}>
-                    <option value="Option 1">Option 1</option>
-                    <option value="Option 2">Option 2</option>
-                    <option value="Option 3">Option 3</option>
-                    <option value="Option 4">Option 4</option>
-                    <option value="Option 5">Option 5</option>
+                    <option value="2WD Dynamometer (Model : AK-5600)">2WD Dynamometer (Model : AK-5600)</option>
+                    <option value="4WD Dynamometer (Model : AK-5644)">4WD Dynamometer (Model : AK-5644)</option>
+                    <option value="4 Gas Exhaust Emission Tester (Model : 5000)">4 Gas Exhaust Emission Tester (Model : 5000)</option>
+                    <option value="Truck Brake Tester (Model : AK- 5316)">Truck Brake Tester (Model : AK- 5316)</option>
+                    <option value="Headlamp Tester (Model : AK-5410)">Headlamp Tester (Model : AK-5410)</option>
                 </select>
                 <label className="font-semibold mt-4" htmlFor="expiration">Expiration Date</label>
                 <input className="border rounded-md p-2 mt-2 focus:outline-none focus:ring focus:border-blue-300 w-full" type="date" name="expiration" id="expiration" value={date} onChange={(e) => setDate(e.target.value)}/>
