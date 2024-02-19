@@ -48,7 +48,7 @@ export default function CustomerList() {
      * @returns The day of the week (0-6, where 0 is Sunday) that the first day of the given month and year falls on.
      */
     function getStartDayOfMonth(month: number, year: number): number {
-        return new Date(year, month - 1, 2).getDay();
+        return new Date(year, month - 1, 1).getDay();
     }
 
     /**
