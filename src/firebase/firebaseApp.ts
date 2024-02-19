@@ -8,13 +8,13 @@ import { getAuth } from "firebase/auth";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBW9w0VPbVrRXTMvVsyvkbT7_tmJyQh5VQ",
-  authDomain: "aktas-cs-ia.firebaseapp.com",
-  projectId: "aktas-cs-ia",
-  storageBucket: "aktas-cs-ia.appspot.com",
-  messagingSenderId: "336128287737",
-  appId: "1:336128287737:web:49b52226e1690d4e621328",
-  measurementId: "G-YP5RVY8KN1"
+  apiKey: "AIzaSyDtvekdZtkJRq_zUcUMtKIA7SS_1Lsw1YE",
+  authDomain: "aktas-app.firebaseapp.com",
+  projectId: "aktas-app",
+  storageBucket: "aktas-app.appspot.com",
+  messagingSenderId: "905648300756",
+  appId: "1:905648300756:web:f8042508cc2571e99e1141",
+  measurementId: "G-E2NTYNMMS9"
 };
 
 // Initialize Firebase
