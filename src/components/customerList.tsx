@@ -139,13 +139,12 @@ export default function CustomerList() {
         );
     }
 
-    async function handleRemove(user: Client) {
+    async function handleRemove(user: Client) {     // Removal of a user from the list and Firestore.
         try {
             const db = getFirestore();
             const userRef = doc(db, "Clients", user.email); // Assuming email is a unique identifier for the clients
             await deleteDoc(userRef);
             
-            // Optional: Refresh the list in the UI after deletion
             const updatedUsers = users.filter(u => u.email !== user.email);
             setUsers(updatedUsers);
         } catch (error) {
@@ -155,7 +154,7 @@ export default function CustomerList() {
     
     
     
-
+    // useEffect hook to fetch users from Firestore on component mount.
     useEffect(() => {
         async function fetchUsers() {
             try {
@@ -178,13 +177,13 @@ export default function CustomerList() {
         fetchUsers();
     }, []);
 
-    function formatDate(date: Date): string {
+    function formatDate(date: Date): string {     // Function to format dates for display.
         const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
         return date.toLocaleDateString(undefined, options);
     }
     
     
-
+    // Render method including buttons for switching view modes and downloading the PDF, and conditionally rendering the table or calendar view.
     return (
         <div className="flex flex-col">
             <button className="mb-4 bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200" onClick={() => setViewMode(viewMode === "table" ? "calendar" : "table")}>
