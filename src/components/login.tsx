@@ -52,7 +52,7 @@ export default function Login() {
 
       router.push("/"); // redirecting to home page upon successful login
     } catch (error) {
-      console.error("Error logging in:", error); // error handling
+      setError("Error logging in"); // error handling
     }
   }
 
