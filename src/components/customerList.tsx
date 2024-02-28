@@ -4,7 +4,15 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import app from "@/firebase/firebaseApp";
 import React, { useEffect } from "react";
-import { getFirestore, collection, getDocs, Timestamp, deleteDoc, doc } from "firebase/firestore";
+import {
+    getFirestore,
+    collection,
+    getDocs,
+    Timestamp,
+    deleteDoc,
+    doc,
+} from "firebase/firestore";
+import { updateDoc } from "firebase/firestore";
 
 /**
  * Renders a list of customers with their details.
@@ -19,14 +27,14 @@ export default function CustomerList() {
         name: string;
         surname: string;
         email: string;
-        deviceType: string;
+        devices: string[]; 
         number: string;
         date?: Date;
     };
     
-    const [users, setUsers] = React.useState<{ name: string, surname: string, email: string, deviceType: string, number: string, date?: Date }[]>([]);
+    const [users, setUsers] = React.useState<{ name: string, surname: string, email: string, devices: string[], number: string, date?: Date }[]>([]);
 
-    const [hoveredClient, setHoveredClient] = React.useState<{ name: string; surname: string; email: string; deviceType: string; number: string; date?: Date } | null>(null);
+    const [hoveredClient, setHoveredClient] = React.useState<{ name: string; surname: string; email: string; devices: string[]; number: string; date?: Date } | null>(null);
     const [viewMode, setViewMode] = React.useState("table");
     const [currentMonth, setCurrentMonth] = React.useState(new Date().getMonth() + 1);
     const [currentYear, setCurrentYear] = React.useState(new Date().getFullYear());
@@ -68,14 +76,14 @@ export default function CustomerList() {
         const doc = new jsPDF('landscape');
     
         // Table column titles
-        const headers = [["Name", "Surname", "Email", "Device Type", "Number", "Date"]];
+        const headers = [["Name", "Surname", "Email", "Device Types", "Number", "Date"]];
     
         // Transform user data into 2D array for table content
         const data = users.map(user => [
             user.name,
             user.surname,
             user.email,
-            user.deviceType,
+            user.devices.join(", "),
             user.number,
             user.date ? user.date.toDateString() : "N/A"
         ]);
@@ -134,7 +142,7 @@ export default function CustomerList() {
                 Name: {client.name} {client.surname}<br />
                 Email: {client.email}<br />
                 Number: {client.number}<br />
-                Device: {client.deviceType}
+                Device: {client.devices}
             </div>
         );
     }
@@ -160,20 +168,23 @@ export default function CustomerList() {
             try {
                 const db = getFirestore();
                 const querySnapshot = await getDocs(collection(db, "Clients"));
-        
-                const usersList: { name: string, surname: string, email: string, deviceType: string, number: string, date: Date }[] = [];
+
+                const usersList: Client[] = [];
                 querySnapshot.forEach((doc: any) => {
                     const userData = doc.data();
-                    userData.date = userData.date.toDate();  // Convert Timestamp to Date
+                    userData.date = userData.date.toDate(); // Convert Timestamp to Date
                     usersList.push(userData);
                 });
-                usersList.sort((a, b) => (a.date as Date).getTime() - (b.date as Date).getTime());  // Sorting users by date in descending order
+
+                usersList.sort((a, b) =>
+                    (a.date as Date).getTime() - (b.date as Date).getTime()
+                ); // Sorting users by date in descending order
                 setUsers(usersList);
             } catch (error) {
                 console.error("Error fetching users: ", error);
             }
         }
-        
+
         fetchUsers();
     }, []);
 
@@ -278,7 +289,9 @@ export default function CustomerList() {
                                 <td className="px-4 py-2 border border-gray-200">{user.name}</td>
                                 <td className="px-4 py-2 border border-gray-200">{user.surname}</td>
                                 <td className="px-4 py-2 border border-gray-200">{user.email}</td>
-                                <td className="px-4 py-2 border border-gray-200">{user.deviceType}</td>
+                                <td className="px-4 py-2 border border-gray-200 device-list-cell"> 
+                                    {user.devices.join(", ")} 
+                                </td>
                                 <td className="px-4 py-2 border border-gray-200">{user.number}</td>
                                 <td className="px-4 py-2 border border-gray-200">{user.date ? formatDate(user.date) : 'N/A'}</td>
                                 <td className="px-4 py-2 border border-gray-200">

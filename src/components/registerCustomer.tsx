@@ -89,7 +89,7 @@ export default function RegisterCustomer() {
         } catch (error) {
             console.error("Error saving customer: ", error);
             if (typeof error === 'object' && error !== null && 'message' in error) {
-                setFeedback(Error: ${error.message});
+                setFeedback(`Error: ${error.message}`);
             } else {
                 setFeedback('An error occurred while saving the customer.');
             }            
@@ -138,11 +138,11 @@ export default function RegisterCustomer() {
                 <input className="border rounded-md p-2 mt-2 focus:outline-none focus:ring focus:border-blue-300 w-full" type="text" name="surname" id="surname" value={surname} onChange={(e) => setSurname(e.target.value)}/>
                 {deviceTypes.map((deviceTypeData, index) => (
                     <div key={index}>
-                    <label className="font-semibold mt-4" htmlFor={device${index + 1}}>Device Type {index + 1}</label>
+                    <label className="font-semibold mt-4" htmlFor={`device${index + 1}`}>Device Type {index + 1}</label>
                     <select
                         className="border rounded-md p-2 mt-2 focus:outline-none focus:ring focus:border-blue-300 w-full"
-                        name={device${index + 1}}
-                        id={device${index + 1}}
+                        name={`device${index + 1}`}
+                        id={`device${index + 1}`}
                         value={deviceTypeData.deviceType}
                         onChange={(e) => {
                         const updatedDeviceTypes = [...deviceTypes];
