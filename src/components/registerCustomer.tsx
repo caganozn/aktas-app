@@ -4,6 +4,7 @@ import app from "@/firebase/firebaseApp";
 import React, { useState } from 'react';
 import { getFirestore, doc, getDoc, setDoc, Timestamp } from "firebase/firestore";
 import { updateDoc } from "firebase/firestore";
+import { ACTION_REFRESH } from "next/dist/client/components/router-reducer/router-reducer-types";
 
 
 export default function RegisterCustomer() {
@@ -66,6 +67,8 @@ export default function RegisterCustomer() {
                     date: date,
                 });
                 setFeedback("Customer updated successfully!");
+                window.location.reload();
+
             } else {
                 // Add a new customer
                 await setDoc(userRef, {
@@ -77,6 +80,8 @@ export default function RegisterCustomer() {
                     date: date,
                 });
                 setFeedback("Registration successful!");
+                window.location.reload();
+
             }
     
             // Reset form fields after either adding or updating
